@@ -1,7 +1,6 @@
 pipeline {
   environment {
     imagename = "my-flask-image:latest"
- #   registryCredential = 'yenigul-dockerhub'
     dockerImage = ''
   }
 
