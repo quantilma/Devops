@@ -1,36 +1,24 @@
 pipeline {
   environment {
     imagename = "my-flask-image:latest"
+    registryCredential = 'julian-dockerhub'
     dockerImage = ''
   }
-
   agent any
   stages {
     stage('Cloning Git') {
       steps {
-        git([url: 'https://github.com/julianNinoo/Devops.git', branch: 'master', credentialsId: 'git'])
+        git([url: 'https://github.com/ismailyenigul/hacicenkins.git', branch: 'master', credentialsId: 'git'])
 
       }
     }
-}
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build my-flask-image
+          dockerImage = docker.build imagename
         }
       }
     }
-
-    stage('Test image') {
-      steps{
-        script {
-            'echo "Tests passed"'        
-
-}
-    }
-}
-
-
     stage('Deploy Image') {
       steps{
         script {
@@ -40,9 +28,9 @@ pipeline {
 
           }
         }
-     }
+      }
     }
-     stage('Remove Unused docker image') {
+    stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $imagename:$BUILD_NUMBER"
          sh "docker rmi $imagename:latest"
@@ -50,4 +38,4 @@ pipeline {
       }
     }
   }
-
+}
