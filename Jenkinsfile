@@ -20,22 +20,27 @@ pipeline {
         }
       }
     }
-    stage('Deploy Image') {
+    
+    stage('remove container') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("$BUILD_NUMBER")
-             dockerImage.push('latest')
+          sh 'sudo docker stop $(docker ps -a -q)'
+          sh 'docker rm $(docker ps -a -q)'
+         }
+       }
+    }  
 
+    stage('remove images') {
+      steps{
+        script {
+          sh 'sudo docker rmi $(docker images -q)'
           }
         }
       }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $imagename:$BUILD_NUMBER"
-         sh "docker rmi $imagename:latest"
 
+    stage('Deploy images') {
+      steps{
+        sh 'sudo docker run -d -p 5000:5000 my-flask-image'
       }
     }
   }
