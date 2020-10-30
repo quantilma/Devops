@@ -24,8 +24,8 @@ pipeline {
     stage('remove container') {
       steps{
         script {
-          sh 'sudo docker stop $(docker ps -a -q)'
-          sh 'sudo docker rm $(docker ps -a -q)'
+          sh 'docker stop $(docker ps -a -q)'
+          sh 'docker rm $(docker ps -a -q)'
          }
        }
     }  
@@ -33,14 +33,14 @@ pipeline {
     stage('remove images') {
       steps{
         script {
-          sh 'sudo docker rmi $(docker images -q)'
+          sh 'docker rmi $(docker images -q)'
           }
         }
       }
 
     stage('Deploy images') {
       steps{
-        sh 'sudo docker run -d -p 5000:5000 my-flask-image'
+        sh 'docker run -d -p 5000:5000 my-flask-image'
       }
     }
   }
