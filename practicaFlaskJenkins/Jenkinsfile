@@ -15,7 +15,8 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          sh 'docker build -t my-flask-image:latest .'
+	  sh 'cd /home/juliannino00/Devops/practicaFlaskJenkins'
+	  sh 'docker build -t my-flask-image:latest .'
         }
       }
     }
