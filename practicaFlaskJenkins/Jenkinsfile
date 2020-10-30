@@ -12,14 +12,6 @@ pipeline {
 
       }
     }
-    stage('Building image') {
-      steps{
-        script {
-	  sh 'cd /home/juliannino00/Devops/practicaFlaskJenkins'
-	  sh 'docker build -t my-flask-image:latest .'
-        }
-      }
-    }
     
     stage('remove container') {
       steps{
@@ -37,6 +29,16 @@ pipeline {
           }
         }
       }
+    
+    stage('Building image') {
+      steps{
+        script {
+	  sh 'cd /home/juliannino00/Devops/practicaFlaskJenkins'
+	  sh 'docker build -t my-flask-image:latest .'
+        }
+      }
+    }
+
 
     stage('Deploy images') {
       steps{
