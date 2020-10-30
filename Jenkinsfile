@@ -16,7 +16,7 @@ pipeline {
       steps{
         script {
 	  sh 'cd /home/juliannino00/Devops/practicaFlaskJenkins'
-	  sh 'docker build -t my-flask-image:latest .'
+	  sh 'sudo docker build -t my-flask-image:latest .'
         }
       }
     }
@@ -25,7 +25,7 @@ pipeline {
       steps{
         script {
           sh 'sudo docker stop $(docker ps -a -q)'
-          sh 'docker rm $(docker ps -a -q)'
+          sh 'sudo docker rm $(docker ps -a -q)'
          }
        }
     }  
