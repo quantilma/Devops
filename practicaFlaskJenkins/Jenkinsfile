@@ -16,7 +16,7 @@ pipeline {
     stage('Test Code') {
       steps{
         script {
-          sh 'py.test'
+          sh 'sudo py.test'
           }
         }
       }
