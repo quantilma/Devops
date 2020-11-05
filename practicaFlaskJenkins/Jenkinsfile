@@ -12,7 +12,15 @@ pipeline {
 
       }
     }
-    
+   
+    stage('Test Code') {
+      steps{
+        script {
+          sh 'py.test'
+          }
+        }
+      }
+ 
     stage('remove container') {
       steps{
         script {
