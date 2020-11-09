@@ -1,2 +1,0 @@
-# Devops
-Transformación Digital
